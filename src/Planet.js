@@ -6,12 +6,7 @@ THREE.SolarSystem.Planet = function (config) {
 	
 	this.isNewlyActive = true;
 	
-	if (config.data.representation.texture.indexOf(".dds") > -1) {
-		this.texture = THREE.ImageUtils.loadCompressedTexture(config.data.representation.texture, undefined, function () {})
-	}
-	else {
-		this.texture = THREE.ImageUtils.loadTexture(config.data.representation.texture, undefined, function () {})
-	}
+	this.texture = THREE.ImageUtils.loadTexture(config.data.representation.texture, undefined, function () {})
 	
 	
 };
@@ -32,9 +27,7 @@ THREE.SolarSystem.Planet.prototype = {
 	renderExtras: function () {
 
 		// if (this.data.name = "Earth") {
-			MessageController.sendMessage("app-controller", "set-minimum-zoom-level", this.mesh.radius * 1.2);
-			MessageController.sendMessage("app-controller", "set-minimum-zoom-level-reached-callback", this.swapToLOD.bind(this));
-			
+
 			this.loadDepthMap();
 			
 		// }

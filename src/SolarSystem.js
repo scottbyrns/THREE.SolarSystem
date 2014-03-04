@@ -4,7 +4,7 @@ THREE.SolarSystem = function (data, scene) {
 	
 	this.star = this.buildStar();
 	
-	this.starLight = new THREE.SolarSystem.StarLight(this.star);
+	// this.starLight = new THREE.SolarSystem.StarLight(this.star);
 	
 	
 	this.drawPlanetOrbits();
@@ -54,7 +54,7 @@ THREE.SolarSystem.prototype = {
 	update: function () {
 	
 	
-		this.sunShader.uniforms[ 'time' ].value = .00025 * ( new Date() );
+		// this.sunShader.uniforms[ 'time' ].value = .00025 * ( new Date() );
 						
 		var planetIsActive = false;
 		var renderedPlanets = this.planets;
@@ -89,46 +89,34 @@ THREE.SolarSystem.prototype = {
 	buildStar: function () {
 		
 		var texture = THREE.ImageUtils.loadTexture(this.data.sun.representation.texture);
-		var shaderMaterial = new THREE.ShaderMaterial( {
- 
-		    uniforms: { 
-		        surface: { // texture in slot 0, loaded with ImageUtils
-		            type: "t", 
-		            // value: 0, 
-		            value: texture
-		        },
-		        time: { // float initialized to 0
-		            type: "f", 
-		            value: 0.0 
-		        }
-		    },
-		    vertexShader: document.getElementById( 'sunSurfaceVertexShader' ).textContent,
-		    fragmentShader: document.getElementById( 'sunSurfaceFragmentShader' ).textContent
-     
-		} );
-		
-		this.sunShader = shaderMaterial;
-		
+		// var shaderMaterial = new THREE.ShaderMaterial( {
+		//  
+		//     uniforms: { 
+		//         surface: { // texture in slot 0, loaded with ImageUtils
+		//             type: "t", 
+		//             // value: 0, 
+		//             value: texture
+		//         },
+		//         time: { // float initialized to 0
+		//             type: "f", 
+		//             value: 0.0 
+		//         }
+		//     },
+		//     vertexShader: document.getElementById( 'sunSurfaceVertexShader' ).textContent,
+		//     fragmentShader: document.getElementById( 'sunSurfaceFragmentShader' ).textContent
+		//      
+		// } );
+		// 
+		// this.sunShader = shaderMaterial;
+		// 
 		
 		var sun = THREE.SolarSystem.PlanetBuilder.build({
 			radius: this.data.sun.radius * 10,
 			resolution: 128,
 			mapImage: texture,
-			bumpMap: THREE.ImageUtils.loadTexture(this.data.sun.representation.bumpMap, undefined, function () {}),
-			atmosphereMaterial: new THREE.ShaderMaterial( 
-			{
-			    uniforms:       
-				{ 
-					"c":   { type: "f", value: 0.1 },
-					"p":   { type: "f", value: 1.0 },
-				},
-				vertexShader:   document.getElementById( 'vertexShaderAtmosphere'   ).textContent,
-				fragmentShader: document.getElementById( 'fragmentShaderAtmosphere' ).textContent,
-				transparent:true
-			}   )
 		});
 		
-		sun.material = shaderMaterial;
+		// sun.material = shaderMaterial;
 		return sun;
 			
 	},
