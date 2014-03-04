@@ -1,4 +1,4 @@
-THREE.js-Solar-System
+THREE.SolarSystem
 =====================
 
 A library for generating solar systems with THREE.js
